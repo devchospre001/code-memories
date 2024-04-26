@@ -1,0 +1,105 @@
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+#form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#manual {
+  padding: 1rem;
+  width: -webkit-fill-available;
+}
+
+#notice {
+  text-decoration: underline;
+  color: yellow;
+  cursor: pointer;
+  font-size: 0.825rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+#memory-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#memory-box-label {
+  font-size: 1rem;
+}
+
+#memory-box {
+  margin: 0.525rem 0;
+  min-width: 100%;
+  width: 100%;
+  height: 100px;
+  text-indent: 1rem;
+  padding: 1rem 0;
+  font-size: 1.25rem;
+}
+
+#memory-btn {
+  width: 100%;
+  min-width: 100%;
+  background: #0e639c;
+  border: 0;
+  outline: 0;
+  color: #fff;
+  padding: 0.525rem 0;
+  cursor: pointer;
+}
+
+#remove-btn {
+  outline: none;
+  padding: 0.525rem 0;
+  cursor: pointer;
+  color: #fff;
+  background-color: #f14c4c;
+  min-width: 100%;
+  width: 100%;
+  border: none;
+}
+
+#memory-btn:hover {
+  background: #355870;
+}
+
+#remove-btn:hover {
+  background-color: #934c4c;
+}
+
+p.hidden,
+#memory-container.hidden {
+  display: none;
+}
+
+#memories {
+  width: 100%;
+  min-width: 100%;
+}
+
+#memories #memory-list {
+  padding: 1rem;
+  text-decoration: none;
+  list-style-type: none;
+}
+
+#memories #memory-list #memory-item {
+  display: flex;
+  flex-direction: column;
+}
+
+#memory-title-box {
+  padding: 0.725rem 0;
+  margin: 0.825rem 0;
+  text-indent: 1rem;
+}
+
+#error-message {
+  color: red;
+}
