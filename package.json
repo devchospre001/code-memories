@@ -1,11 +1,11 @@
 {
-  "name": "cm",
+  "name": "code-memories",
   "displayName": "Code Memories",
   "description": "Code Memories is a unique extension for Visual Studio Code designed to capture and preserve the essence of your coding journey. It serves as a digital scrapbook, allowing you to document memorable moments, significant milestones, and personal reflections within your codebase. With Code Memories, every line of code becomes a chapter in your coding story, enriching your development experience with a touch of nostalgia and sentimentality.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "devchospre001",
   "repository": {
-    "url": "localhost"
+    "url": "https://github.com/devchospre001/code-memories"
   },
   "license": "MIT",
   "engines": {
@@ -19,7 +19,12 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [],
+    "commands": [
+      {
+        "command": "cm.captureMemory",
+        "title": "Capture Memory"
+      }
+    ],
     "menus": {
       "editor/context": [
         {

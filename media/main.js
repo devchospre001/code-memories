@@ -136,3 +136,46 @@ messageNotice.onclick = () => {
 memoryButton.onclick = () => {
   addMemory();
 };
+
+window.addEventListener("message", (event) => {
+  const { type } = event.data;
+
+  if (type === "auto") {
+    addMemoryFromEditor();
+  }
+});
+
+function addMemoryFromEditor() {
+  let newMemory = { title: "", description: "" };
+
+  function handleMessage(event) {
+    const { message, type } = event.data;
+    switch (type) {
+      case "title":
+        newMemory.title = message;
+        break;
+      case "description":
+        newMemory.description = message;
+        break;
+    }
+
+    if (newMemory.title !== "" && newMemory.description !== "") {
+      console.log("new memory: ", newMemory);
+      const transaction = db.transaction(["memories"], "readwrite");
+      const objectStore = transaction.objectStore("memories");
+      const query = objectStore.add(newMemory);
+
+      query.addEventListener("success", () => {
+        showMemories();
+      });
+
+      transaction.addEventListener("error", () => {
+        throw Error("DB: Transaction error!");
+      });
+
+      window.removeEventListener("message", handleMessage);
+    }
+  }
+
+  window.addEventListener("message", handleMessage);
+}
