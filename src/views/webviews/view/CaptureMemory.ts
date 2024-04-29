@@ -1,11 +1,20 @@
 import * as vscode from "vscode";
 
+type TMessage = {
+  type: string;
+  message: string;
+};
+
 export class CaptureMemory implements vscode.WebviewViewProvider {
   public static readonly viewType = "captured-memories";
 
   private _view?: vscode.WebviewView;
 
   constructor(private readonly _extensionUri: vscode.Uri) {}
+
+  public postMessageToWebView(message: TMessage) {
+    this._view?.webview.postMessage(message);
+  }
 
   public resolveWebviewView(
     webviewView: vscode.WebviewView,
@@ -22,12 +31,27 @@ export class CaptureMemory implements vscode.WebviewViewProvider {
     webviewView.webview.onDidReceiveMessage(async (message) => {
       switch (message.command) {
         case "deletionAlert":
-          vscode.window.showErrorMessage(message.alert);
+          vscode.window.showInformationMessage(message.alert);
           break;
         case "addingAlert":
           vscode.window.showErrorMessage(message.alert);
       }
     });
+  }
+
+  public getTextSelectionAsMemory() {
+    const editor = vscode.window.activeTextEditor;
+    const selection = editor?.selection;
+
+    if (selection && !selection.isEmpty) {
+      const selectionRange = new vscode.Range(
+        selection.start.line,
+        selection.start.character,
+        selection.end.line,
+        selection.end.character
+      );
+      return editor.document.getText(selectionRange);
+    }
   }
 
   private _getHtmlForWebview(webview: vscode.Webview) {
